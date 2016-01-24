@@ -1,0 +1,59 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="NAME">rock.namespace</span><span class="PUNC">(</span><span class="STRN">'rock.game.engine'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="COMM">/**
+<span class='line'>  4</span>  * This class is responsible to manage representation. This class knows what representation need each world object
+<span class='line'>  5</span>  * and also is able to get all representations from the world. This is the main class when working with representations.
+<span class='line'>  6</span>  *
+<span class='line'>  7</span>  * @param {rock.game.graphics.engine.RenderEngine} renderEngine
+<span class='line'>  8</span>  *
+<span class='line'>  9</span>  * @param {rock.game.Repository} repository
+<span class='line'> 10</span>  *
+<span class='line'> 11</span>  * @constructor
+<span class='line'> 12</span>  *
+<span class='line'> 13</span>  * @author Luis Alberto Jiménez
+<span class='line'> 14</span>  */</span><span class="WHIT">
+<span class='line'> 15</span> </span><span class="NAME">rock.game.engine.RepresentationAttendant</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">renderEngine</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">repository</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 16</span>     </span><span class="NAME">this.renderEngine</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">renderEngine</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 17</span>     </span><span class="NAME">this.repository</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">repository</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 18</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 19</span> 
+<span class='line'> 20</span> </span><span class="COMM">/**
+<span class='line'> 21</span>  * Create a representation for a world object
+<span class='line'> 22</span>  *
+<span class='line'> 23</span>  * @param {rock.game.universe.Object} object
+<span class='line'> 24</span>  *
+<span class='line'> 25</span>  * @abstract
+<span class='line'> 26</span>  * @function
+<span class='line'> 27</span>  */</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="NAME">rock.game.engine.RepresentationAttendant.prototype.createRepresentation</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">rock.abstract_</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 29</span> 
+<span class='line'> 30</span> </span><span class="COMM">/**
+<span class='line'> 31</span>  * Extract representations for the world objects
+<span class='line'> 32</span>  *
+<span class='line'> 33</span>  * @param {rock.game.universe.World} world
+<span class='line'> 34</span>  *
+<span class='line'> 35</span>  * @abstract
+<span class='line'> 36</span>  * @function
+<span class='line'> 37</span>  */</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="NAME">rock.game.engine.RepresentationAttendant.prototype.getRepresentations</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">rock.abstract_</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 39</span> 
+<span class='line'> 40</span> </span><span class="COMM">/**
+<span class='line'> 41</span>  * Get the renderEngine
+<span class='line'> 42</span>  */</span><span class="WHIT">
+<span class='line'> 43</span> </span><span class="NAME">rock.game.engine.RepresentationAttendant.prototype.getRenderEngine</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 44</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.renderEngine</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 45</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 46</span> 
+<span class='line'> 47</span> </span><span class="COMM">/**
+<span class='line'> 48</span>  * Get the repository
+<span class='line'> 49</span>  */</span><span class="WHIT">
+<span class='line'> 50</span> </span><span class="NAME">rock.game.engine.RepresentationAttendant.prototype.getRepository</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 51</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.repository</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 52</span> </span><span class="PUNC">}</span><span class="PUNC">;</span></pre></body></html>

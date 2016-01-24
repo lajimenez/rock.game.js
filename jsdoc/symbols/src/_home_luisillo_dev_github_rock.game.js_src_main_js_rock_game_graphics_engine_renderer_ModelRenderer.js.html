@@ -1,0 +1,80 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="NAME">rock.namespace</span><span class="PUNC">(</span><span class="STRN">'rock.game.graphics.engine.renderer'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="COMM">/**
+<span class='line'>  4</span>  * This class is the rensponsible for rendering a model with a specific lighting.
+<span class='line'>  5</span>  * All renderers must inherit this class.
+<span class='line'>  6</span>  *
+<span class='line'>  7</span>  * @param {String} lightingType
+<span class='line'>  8</span>  *         the lighting type
+<span class='line'>  9</span>  * @param {String} modelType
+<span class='line'> 10</span>  *         the model type
+<span class='line'> 11</span>  *
+<span class='line'> 12</span>  * @constructor
+<span class='line'> 13</span>  * @abstract
+<span class='line'> 14</span>  *
+<span class='line'> 15</span>  * @author Luis Alberto Jiménez
+<span class='line'> 16</span>  */</span><span class="WHIT">
+<span class='line'> 17</span> </span><span class="NAME">rock.game.graphics.engine.renderer.ModelRenderer</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">lightingType</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">modelType</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 18</span>     </span><span class="NAME">this.lightingType</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">lightingType</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 19</span>     </span><span class="NAME">this.modelType</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">modelType</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 20</span> 
+<span class='line'> 21</span>     </span><span class="NAME">this.rendererContext</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 22</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 23</span> 
+<span class='line'> 24</span> </span><span class="COMM">/**
+<span class='line'> 25</span>  * Render de model
+<span class='line'> 26</span>  *
+<span class='line'> 27</span>  * @params lighting
+<span class='line'> 28</span>  *
+<span class='line'> 29</span>  * @param camera
+<span class='line'> 30</span>  *
+<span class='line'> 31</span>  * @params {rock.game.graphics.engine.renderer.ModelRenderable} renderable
+<span class='line'> 32</span>  *
+<span class='line'> 33</span>  * @abstract
+<span class='line'> 34</span>  * @function
+<span class='line'> 35</span>  */</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="NAME">rock.game.graphics.engine.renderer.ModelRenderer.prototype.render</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">rock.abstract_</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 37</span> 
+<span class='line'> 38</span> </span><span class="NAME">rock.game.graphics.engine.renderer.ModelRenderer.prototype.setUp</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 40</span> 
+<span class='line'> 41</span> </span><span class="NAME">rock.game.graphics.engine.renderer.ModelRenderer.prototype.tearDown</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 43</span> 
+<span class='line'> 44</span> </span><span class="COMM">/**
+<span class='line'> 45</span>  * Get the lightingType
+<span class='line'> 46</span>  */</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="NAME">rock.game.graphics.engine.renderer.ModelRenderer.prototype.getLightingType</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 48</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.lightingType</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 50</span> 
+<span class='line'> 51</span> </span><span class="COMM">/**
+<span class='line'> 52</span>  * Get the modelType
+<span class='line'> 53</span>  */</span><span class="WHIT">
+<span class='line'> 54</span> </span><span class="NAME">rock.game.graphics.engine.renderer.ModelRenderer.prototype.getModelType</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 55</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.modelType</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 56</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 57</span> 
+<span class='line'> 58</span> </span><span class="COMM">/**
+<span class='line'> 59</span>  * Get the rendererContext
+<span class='line'> 60</span>  */</span><span class="WHIT">
+<span class='line'> 61</span> </span><span class="NAME">rock.game.graphics.engine.renderer.ModelRenderer.prototype.getRendererContext</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 62</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.rendererContext</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 63</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 64</span> 
+<span class='line'> 65</span> </span><span class="COMM">/**
+<span class='line'> 66</span>  * Set the rendererContext
+<span class='line'> 67</span>  *
+<span class='line'> 68</span>  * @param rendererContext the value
+<span class='line'> 69</span>  */</span><span class="WHIT">
+<span class='line'> 70</span> </span><span class="NAME">rock.game.graphics.engine.renderer.ModelRenderer.prototype.setRendererContext</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">rendererContext</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 71</span>     </span><span class="NAME">this.rendererContext</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">rendererContext</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 72</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 73</span> </span></pre></body></html>

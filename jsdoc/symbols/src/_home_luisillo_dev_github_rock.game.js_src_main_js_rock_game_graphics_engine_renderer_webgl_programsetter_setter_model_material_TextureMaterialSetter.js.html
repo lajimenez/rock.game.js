@@ -1,0 +1,67 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="NAME">rock.namespace</span><span class="PUNC">(</span><span class="STRN">'rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="COMM">/**
+<span class='line'>  4</span>  * Setter for {@link rock.game.graphics.model.material.TextureMaterial}
+<span class='line'>  5</span>  *
+<span class='line'>  6</span>  * @param {rock.graphics.engine.WebGLGraphicsEngine} glContext
+<span class='line'>  7</span>  *         the WebGL context
+<span class='line'>  8</span>  *
+<span class='line'>  9</span>  * @constructor
+<span class='line'> 10</span>  * @extends rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material.MaterialSetter
+<span class='line'> 11</span>  *
+<span class='line'> 12</span>  * @author Luis Alberto Jiménez
+<span class='line'> 13</span>  */</span><span class="WHIT">
+<span class='line'> 14</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material.TextureMaterialSetter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">glContext</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 15</span>     </span><span class="NAME">this.TEXTURE</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">'u_texture'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 16</span> 
+<span class='line'> 17</span>     </span><span class="NAME">rock.super_</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">glContext</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 18</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 19</span> 
+<span class='line'> 20</span> </span><span class="NAME">rock.extends_</span><span class="PUNC">(</span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material.TextureMaterialSetter</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 21</span>     </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material.MaterialSetter</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 22</span> 
+<span class='line'> 23</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material.TextureMaterialSetter.prototype.getAttributeNames</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 24</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 26</span> 
+<span class='line'> 27</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material.TextureMaterialSetter.prototype.getUniformNames</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 28</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material.TextureMaterialSetter.prototype.getTextureNames</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 31</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">this.TEXTURE</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 33</span> 
+<span class='line'> 34</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material.TextureMaterialSetter.prototype.setValues</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">program</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">settable</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 35</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">material</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">settable.getMaterial</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 36</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">textureMaterialAdapter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">settable.getAdapter</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 37</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">textureAdapter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 38</span> 
+<span class='line'> 39</span>     </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">rock.util.JsUtils.isNullOrUndefined</span><span class="PUNC">(</span><span class="NAME">textureMaterialAdapter</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 40</span>         </span><span class="NAME">textureAdapter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">textureMaterialAdapter.getTextureAdapter</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 41</span>     </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 42</span> 
+<span class='line'> 43</span>     </span><span class="NAME">this.setTexture</span><span class="PUNC">(</span><span class="NAME">program</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">material.getTexture</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">textureAdapter</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 44</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 45</span> 
+<span class='line'> 46</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material.TextureMaterialSetter.prototype.setTexture</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">program</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">texture</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">textureAdapter</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 47</span>     </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">rock.util.JsUtils.isNullOrUndefined</span><span class="PUNC">(</span><span class="NAME">textureAdapter</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 48</span>         </span><span class="NAME">this.setAttributesFromTexture</span><span class="PUNC">(</span><span class="NAME">program</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">texture</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 49</span>     </span><span class="PUNC">}</span><span class="WHIT"> </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 50</span>         </span><span class="NAME">this.setAttributesFromTextureAdapter</span><span class="PUNC">(</span><span class="NAME">program</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">textureAdapter</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 51</span>     </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 52</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 53</span> 
+<span class='line'> 54</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material.TextureMaterialSetter.prototype.setAttributesFromTexture</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">program</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">texture</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 55</span>     </span><span class="NAME">program.populateTexture</span><span class="PUNC">(</span><span class="NAME">this.TEXTURE</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">texture.getImage</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 56</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 57</span> 
+<span class='line'> 58</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.material.TextureMaterialSetter.prototype.setAttributesFromTextureAdapter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">program</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">textureAdapter</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 59</span>     </span><span class="NAME">program.updateTexture</span><span class="PUNC">(</span><span class="NAME">this.TEXTURE</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">textureAdapter.getGlTexture</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 60</span> </span><span class="PUNC">}</span><span class="PUNC">;</span></pre></body></html>

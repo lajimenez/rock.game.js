@@ -1,0 +1,89 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="NAME">rock.namespace</span><span class="PUNC">(</span><span class="STRN">'rock.game.graphics.model'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="COMM">/**
+<span class='line'>  4</span>  * A model is something that can be renderer. A model is composed by a {@link rock.game.graphics.model.mesh.Mesh},
+<span class='line'>  5</span>  * that contains its geometry and a {@link rock.game.graphics.model.material.Material} that specifies how it has
+<span class='line'>  6</span>  * to be colored (and shaded)
+<span class='line'>  7</span>  *
+<span class='line'>  8</span>  * Please, note that Mesh shouldn't has state as it's something 'static' that can be shared.
+<span class='line'>  9</span>  * To add some state you should use a ModelRenderable (please, see {@link rock.game.graphics.engine.renderer.webgl.ModelRenderer},
+<span class='line'> 10</span>  * {@link rock.game.graphics.engine.renderer.RendererContext}, and {@link rock.game.graphics.engine.renderer.ModelRenderable} class
+<span class='line'> 11</span>  * for more info)
+<span class='line'> 12</span>  *
+<span class='line'> 13</span>  * A model should be agnostic about how its data must be interpreted. It's up to you assure that data
+<span class='line'> 14</span>  * is coherent with Renderer expectations.
+<span class='line'> 15</span>  *
+<span class='line'> 16</span>  * @constructor
+<span class='line'> 17</span>  * @abstract
+<span class='line'> 18</span>  *
+<span class='line'> 19</span>  * @author Luis Alberto Jiménez
+<span class='line'> 20</span>  */</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="NAME">rock.game.graphics.model.Model</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">type</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 22</span>     </span><span class="NAME">rock.super_</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">arguments</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 23</span>     </span><span class="NAME">this.mesh</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 24</span>     </span><span class="NAME">this.material</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 26</span> 
+<span class='line'> 27</span> </span><span class="NAME">rock.extends_</span><span class="PUNC">(</span><span class="NAME">rock.game.graphics.model.Model</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.model.BaseModel</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 28</span> 
+<span class='line'> 29</span> </span><span class="COMM">/**
+<span class='line'> 30</span>  * Load the model from JSON
+<span class='line'> 31</span>  *
+<span class='line'> 32</span>  * @param JSON
+<span class='line'> 33</span>  *      the JSON
+<span class='line'> 34</span>  * @param {rock.game.Repository} [repository]
+<span class='line'> 35</span>  *      the repository
+<span class='line'> 36</span>  * @function
+<span class='line'> 37</span>  */</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="NAME">rock.game.graphics.model.Model.prototype.loadFromJSON</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">rock.abstract_</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 39</span> 
+<span class='line'> 40</span> </span><span class="NAME">rock.game.graphics.model.Model.prototype.getBBOX</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 41</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.mesh.getBBOX</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 43</span> 
+<span class='line'> 44</span> </span><span class="NAME">rock.game.graphics.model.Model.prototype.getCenter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 45</span>    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.getBBOX</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">getCenter</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 47</span> 
+<span class='line'> 48</span> </span><span class="NAME">rock.game.graphics.model.Model.prototype.getMeshCount</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 49</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.mesh.getIndexes</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">length</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 50</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 51</span> 
+<span class='line'> 52</span> </span><span class="COMM">/**
+<span class='line'> 53</span>  * Get the mesh
+<span class='line'> 54</span>  */</span><span class="WHIT">
+<span class='line'> 55</span> </span><span class="NAME">rock.game.graphics.model.Model.prototype.getMesh</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 56</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.mesh</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 57</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 58</span> 
+<span class='line'> 59</span> </span><span class="COMM">/**
+<span class='line'> 60</span>  * Set the mesh
+<span class='line'> 61</span>  *
+<span class='line'> 62</span>  * @param mesh the value
+<span class='line'> 63</span>  */</span><span class="WHIT">
+<span class='line'> 64</span> </span><span class="NAME">rock.game.graphics.model.Model.prototype.setMesh</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">mesh</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 65</span>     </span><span class="NAME">this.mesh</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">mesh</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 66</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 67</span> 
+<span class='line'> 68</span> </span><span class="COMM">/**
+<span class='line'> 69</span>  * Get the material
+<span class='line'> 70</span>  */</span><span class="WHIT">
+<span class='line'> 71</span> </span><span class="NAME">rock.game.graphics.model.Model.prototype.getMaterial</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 72</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.material</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 73</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 74</span> 
+<span class='line'> 75</span> </span><span class="COMM">/**
+<span class='line'> 76</span>  * Set the material
+<span class='line'> 77</span>  *
+<span class='line'> 78</span>  * @param material the value
+<span class='line'> 79</span>  */</span><span class="WHIT">
+<span class='line'> 80</span> </span><span class="NAME">rock.game.graphics.model.Model.prototype.setMaterial</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">material</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 81</span>     </span><span class="NAME">this.material</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">material</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 82</span> </span><span class="PUNC">}</span><span class="PUNC">;</span></pre></body></html>

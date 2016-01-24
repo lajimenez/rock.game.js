@@ -1,0 +1,28 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="NAME">rock.namespace</span><span class="PUNC">(</span><span class="STRN">'rock.game.graphics.engine.renderer.webgl.programsetter.adapter.model'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="COMM">/**
+<span class='line'>  4</span>  * Adapter for {@link rock.game.graphics.model.TextureModel}
+<span class='line'>  5</span>  *
+<span class='line'>  6</span>  * @constructor
+<span class='line'>  7</span>  * @abstract
+<span class='line'>  8</span>  * @extends rock.game.graphics.engine.renderer.webgl.programsetter.adapter.model.ModelAdapter
+<span class='line'>  9</span>  *
+<span class='line'> 10</span>  * @author Luis Alberto Jiménez
+<span class='line'> 11</span>  */</span><span class="WHIT">
+<span class='line'> 12</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.adapter.model.TextureModelAdapter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">glContext</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">model</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 13</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">meshAdapterClass</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT">
+<span class='line'> 14</span>         </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.adapter.model.mesh.TextureCoordMeshAdapter</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 15</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">materialAdapterClass</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT">
+<span class='line'> 16</span>         </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.adapter.model.material.TextureModelAdapter</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 17</span>     </span><span class="NAME">rock.super_</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">glContext</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">model</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">meshAdapterClass</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">materialAdapterClass</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 18</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 19</span> 
+<span class='line'> 20</span> </span><span class="NAME">rock.extends_</span><span class="PUNC">(</span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.adapter.model.TextureModelAdapter</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 21</span>     </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.adapter.model.ModelAdapter</span><span class="PUNC">)</span><span class="PUNC">;</span></pre></body></html>

@@ -1,0 +1,37 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="NAME">rock.namespace</span><span class="PUNC">(</span><span class="STRN">'rock.game.graphics.model'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="COMM">/**
+<span class='line'>  4</span>  * Model that uses a texture for color.
+<span class='line'>  5</span>  *
+<span class='line'>  6</span>  * @constructor
+<span class='line'>  7</span>  * @extends rock.game.graphics.model.Model
+<span class='line'>  8</span>  *
+<span class='line'>  9</span>  * @author Luis Alberto Jiménez
+<span class='line'> 10</span>  */</span><span class="WHIT">
+<span class='line'> 11</span> </span><span class="NAME">rock.game.graphics.model.TextureModel</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 12</span>     </span><span class="NAME">rock.super_</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">rock.game.constants.TEXTURE_MODEL_TYPE</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 13</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 14</span> 
+<span class='line'> 15</span> </span><span class="NAME">rock.extends_</span><span class="PUNC">(</span><span class="NAME">rock.game.graphics.model.TextureModel</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.model.Model</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 16</span> 
+<span class='line'> 17</span> </span><span class="COMM">/**
+<span class='line'> 18</span>  * @see rock.game.graphics.model.Model#loadFromJSON
+<span class='line'> 19</span>  * @override
+<span class='line'> 20</span>  */</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="NAME">rock.game.graphics.model.TextureModel.prototype.loadFromJSON</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">JSON</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">repository</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 22</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">mesh</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.model.mesh.TextureCoordMesh</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 23</span>     </span><span class="NAME">mesh.loadFromJSON</span><span class="PUNC">(</span><span class="NAME">JSON.mesh</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 24</span>     </span><span class="NAME">this.mesh</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">mesh</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 25</span> 
+<span class='line'> 26</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">material</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.model.material.TextureMaterial</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 27</span>     </span><span class="NAME">material.loadFromJSON</span><span class="PUNC">(</span><span class="NAME">JSON.material</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">repository</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 28</span>     </span><span class="NAME">this.material</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">material</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 30</span> </span></pre></body></html>

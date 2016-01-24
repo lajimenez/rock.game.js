@@ -1,0 +1,87 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="NAME">rock.namespace</span><span class="PUNC">(</span><span class="STRN">'rock.game.graphics.engine.renderer.webgl'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="COMM">/**
+<span class='line'>  4</span>  * Renderer for {@link rock.game.graphics.model.PhongTextureModel} with {@link rock.game.graphics.scene.PointLighting}
+<span class='line'>  5</span>  *
+<span class='line'>  6</span>  * @param {rock.graphics.engine.webgl.WebGLContext} glContext
+<span class='line'>  7</span>  *         the WebGL context
+<span class='line'>  8</span>  *
+<span class='line'>  9</span>  * @constructor
+<span class='line'> 10</span>  * @extends rock.game.graphics.engine.renderer.webgl.ModelRenderer
+<span class='line'> 11</span>  *
+<span class='line'> 12</span>  * @author Luis Alberto Jiménez
+<span class='line'> 13</span>  */</span><span class="WHIT">
+<span class='line'> 14</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.PointLightingPhongTextureMaterialModelRenderer</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">glContext</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 15</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">lightingType</span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">rock.game.constants.POINT_LIGHTING_TYPE</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 16</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">modelType</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">rock.game.constants.PHONG_TEXTURE_MODEL_TYPE</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 17</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">gl</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">glContext.getHTMLContext</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 18</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">drawingMode</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">gl.TRIANGLES</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 19</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">vertexShaderSrc</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.GLSL.TEXTURE_NORMAL_VERTEX_SHADER</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 20</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">fragmentShaderSrc</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.PointLightingPhongTextureMaterialModelRenderer.fragmentShaderSrc</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 21</span> 
+<span class='line'> 22</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">maxLights</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.PointLightingPhongTextureMaterialModelRenderer.MAX_LIGHTS</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 23</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">lightingSetter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT">
+<span class='line'> 24</span>         </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.lighting.PointLightingSetter</span><span class="PUNC">(</span><span class="NAME">glContext</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">maxLights</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 25</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">modelSetter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT">
+<span class='line'> 26</span>         </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.programsetter.setter.model.PhongTextureModelSetter</span><span class="PUNC">(</span><span class="NAME">glContext</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 27</span> 
+<span class='line'> 28</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">superParams</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">lightingType</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">modelType</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">glContext</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">drawingMode</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 29</span>         </span><span class="NAME">vertexShaderSrc</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">fragmentShaderSrc</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 30</span>         </span><span class="NAME">lightingSetter</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">modelSetter</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 31</span> 
+<span class='line'> 32</span>     </span><span class="NAME">rock.super_</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">superParams</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 34</span> 
+<span class='line'> 35</span> </span><span class="NAME">rock.extends_</span><span class="PUNC">(</span><span class="NAME">rock.game.graphics.engine.renderer.webgl.PointLightingPhongTextureMaterialModelRenderer</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 36</span>     </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.ModelRenderer</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 37</span> 
+<span class='line'> 38</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.PointLightingPhongTextureMaterialModelRenderer.MAX_LIGHTS</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NUMB">10</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 39</span> 
+<span class='line'> 40</span> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.PointLightingPhongTextureMaterialModelRenderer.fragmentShaderSrc</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">''</span><span class="WHIT">
+<span class='line'> 41</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.GLSL_PRECISION.ROCK_PRECISION</span><span class="WHIT">
+<span class='line'> 42</span> 
+<span class='line'> 43</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' #define MAX_LIGHTS '</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.PointLightingPhongTextureMaterialModelRenderer.MAX_LIGHTS</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' \n'</span><span class="WHIT">
+<span class='line'> 44</span> 
+<span class='line'> 45</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.GLSL.STRUCT_MATERIAL</span><span class="WHIT">
+<span class='line'> 46</span> 
+<span class='line'> 47</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.GLSL.STRUCT_ATTENUATION_LIGHT</span><span class="WHIT">
+<span class='line'> 48</span> 
+<span class='line'> 49</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.engine.renderer.webgl.GLSL.FUNCTION_CALCULATE_POINT_LIGHT_COLOR</span><span class="WHIT">
+<span class='line'> 50</span> 
+<span class='line'> 51</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' uniform AttenuationLight u_pointLights[MAX_LIGHTS];                                 \n'</span><span class="WHIT">
+<span class='line'> 52</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' uniform int u_pointLightsCount;                                                     \n'</span><span class="WHIT">
+<span class='line'> 53</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' uniform Material u_material;                                                        \n'</span><span class="WHIT">
+<span class='line'> 54</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' uniform sampler2D u_textureAmbient;                                                 \n'</span><span class="WHIT">
+<span class='line'> 55</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' uniform sampler2D u_textureDiffuse;                                                 \n'</span><span class="WHIT">
+<span class='line'> 56</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' uniform sampler2D u_textureSpecular;                                                \n'</span><span class="WHIT">
+<span class='line'> 57</span> 
+<span class='line'> 58</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' varying vec4 v_modelViewVertex;                                                     \n'</span><span class="WHIT">
+<span class='line'> 59</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' varying vec3 v_normal;                                                              \n'</span><span class="WHIT">
+<span class='line'> 60</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' varying vec2 v_texCoord;                                                            \n'</span><span class="WHIT">
+<span class='line'> 61</span> 
+<span class='line'> 62</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' void main() {                                                                       \n'</span><span class="WHIT">
+<span class='line'> 63</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'     vec3 vertex = v_modelViewVertex.xyz;                                            \n'</span><span class="WHIT">
+<span class='line'> 64</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'     vec3 normal = normalize(v_normal);                                              \n'</span><span class="WHIT">
+<span class='line'> 65</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'     vec3 lightColor = vec3(0);                                                      \n'</span><span class="WHIT">
+<span class='line'> 66</span> 
+<span class='line'> 67</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'     Material textureMaterial;                                                       \n'</span><span class="WHIT">
+<span class='line'> 68</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'     textureMaterial.ambient = u_material.ambient * texture2D(u_textureAmbient, v_texCoord).rgb;    \n'</span><span class="WHIT">
+<span class='line'> 69</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'     textureMaterial.diffuse = u_material.diffuse * texture2D(u_textureDiffuse, v_texCoord).rgb;    \n'</span><span class="WHIT">
+<span class='line'> 70</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'     textureMaterial.specular = u_material.specular * texture2D(u_textureSpecular, v_texCoord).rgb; \n'</span><span class="WHIT">
+<span class='line'> 71</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'     textureMaterial.shininess = u_material.shininess;                               \n'</span><span class="WHIT">
+<span class='line'> 72</span> 
+<span class='line'> 73</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'     for (int i = 0; i &lt; MAX_LIGHTS; i++) {                                          \n'</span><span class="WHIT">
+<span class='line'> 74</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'         if (i &lt; u_pointLightsCount) {                                               \n'</span><span class="WHIT">
+<span class='line'> 75</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'             lightColor += calculatePointLightColor(u_pointLights[i], textureMaterial, vertex, normal);   \n'</span><span class="WHIT">
+<span class='line'> 76</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'         }                                                                           \n'</span><span class="WHIT">
+<span class='line'> 77</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'     }                                                                               \n'</span><span class="WHIT">
+<span class='line'> 78</span> 
+<span class='line'> 79</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'     gl_FragColor = vec4(lightColor, u_material.alpha);                              \n'</span><span class="WHIT">
+<span class='line'> 80</span>     </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' }                                                                                   \n'</span><span class="PUNC">;</span></pre></body></html>

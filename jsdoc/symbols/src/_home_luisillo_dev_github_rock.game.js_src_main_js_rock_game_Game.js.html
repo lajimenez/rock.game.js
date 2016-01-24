@@ -1,0 +1,43 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="NAME">rock.namespace</span><span class="PUNC">(</span><span class="STRN">'rock.game'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="COMM">/**
+<span class='line'>  4</span>  * This class represents a game. A game is a kind of application.
+<span class='line'>  5</span>  *
+<span class='line'>  6</span>  * @param {rock.app.InitApplicationParams} initParams
+<span class='line'>  7</span>  *            params for initialization
+<span class='line'>  8</span>  *
+<span class='line'>  9</span>  * @constructor
+<span class='line'> 10</span>  * @abstract
+<span class='line'> 11</span>  * @extends rock.app.Application
+<span class='line'> 12</span>  *
+<span class='line'> 13</span>  * @author Luis Alberto Jiménez
+<span class='line'> 14</span>  */</span><span class="WHIT">
+<span class='line'> 15</span> </span><span class="NAME">rock.game.Game</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">initParams</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 16</span>     </span><span class="NAME">rock.super_</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">arguments</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 17</span>     </span><span class="NAME">this.repository</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">rock.game.Repository</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 18</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 19</span> 
+<span class='line'> 20</span> </span><span class="NAME">rock.extends_</span><span class="PUNC">(</span><span class="NAME">rock.game.Game</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">rock.app.Application</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 21</span> 
+<span class='line'> 22</span> </span><span class="COMM">/**
+<span class='line'> 23</span>  * Get the repository
+<span class='line'> 24</span>  */</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="NAME">rock.game.Game.prototype.getRepository</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 26</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.repository</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 28</span> 
+<span class='line'> 29</span> </span><span class="COMM">/**
+<span class='line'> 30</span>  * Set the repository
+<span class='line'> 31</span>  *
+<span class='line'> 32</span>  * @param repository the value
+<span class='line'> 33</span>  */</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="NAME">rock.game.Game.prototype.setRepository</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">repository</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 35</span>     </span><span class="NAME">this.repository</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">repository</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="PUNC">}</span><span class="PUNC">;</span></pre></body></html>

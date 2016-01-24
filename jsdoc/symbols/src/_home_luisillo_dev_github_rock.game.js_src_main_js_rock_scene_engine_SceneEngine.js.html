@@ -1,0 +1,90 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="NAME">rock.namespace</span><span class="PUNC">(</span><span class="STRN">'rock.scene.engine'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="COMM">/**
+<span class='line'>  4</span>  * Game engine for scene.
+<span class='line'>  5</span>  *
+<span class='line'>  6</span>  * @param {rock.graphics.engine.WebGLGraphicsEngine} graphicsEngine
+<span class='line'>  7</span>  *
+<span class='line'>  8</span>  * @param {rock.game.Repository} repository
+<span class='line'>  9</span>  *
+<span class='line'> 10</span>  * @constructor
+<span class='line'> 11</span>  * @extends rock.game.engine.GameEngine
+<span class='line'> 12</span>  *
+<span class='line'> 13</span>  * @author Luis Alberto Jiménez
+<span class='line'> 14</span>  */</span><span class="WHIT">
+<span class='line'> 15</span> </span><span class="NAME">rock.scene.engine.SceneEngine</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">graphicsEngine</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">repository</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 16</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">renderEngine</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">rock.game.graphics.engine.webgl.RockBasicRenderEngine</span><span class="PUNC">(</span><span class="NAME">graphicsEngine</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 17</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">representationAttendant</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">rock.scene.engine.RepresentationAttendant</span><span class="PUNC">(</span><span class="NAME">renderEngine</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">repository</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 18</span>     </span><span class="NAME">rock.super_</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">renderEngine</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">representationAttendant</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 19</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 20</span> 
+<span class='line'> 21</span> </span><span class="NAME">rock.extends_</span><span class="PUNC">(</span><span class="NAME">rock.scene.engine.SceneEngine</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">rock.game.engine.GameEngine</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 22</span> 
+<span class='line'> 23</span> </span><span class="COMM">/**
+<span class='line'> 24</span>  * @see rock.game.engine.GameEngine#runLogic
+<span class='line'> 25</span>  * @override
+<span class='line'> 26</span>  */</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="NAME">rock.scene.engine.SceneEngine.prototype.runLogic</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 28</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">scene</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this.world</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 29</span>     </span><span class="NAME">this.lighting</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">scene.getLightingNode</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">getLighting</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 30</span>     </span><span class="NAME">this.camera</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">scene.getCameraNode</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">getCamera</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 31</span>     </span><span class="NAME">this.renderEngine.setClearColor</span><span class="PUNC">(</span><span class="NAME">scene.getBackgroundColor</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 32</span>     </span><span class="COMM">// result is not used in scene...</span><span class="WHIT">
+<span class='line'> 33</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 35</span> 
+<span class='line'> 36</span> </span><span class="COMM">/**
+<span class='line'> 37</span>  * Create a node for add an object to the scene
+<span class='line'> 38</span>  *
+<span class='line'> 39</span>  * IMPORTANT: This function creates adapters that you should release manually.
+<span class='line'> 40</span>  * So when you are not gonna use a ModelNode anymore, you should call 'releaseResources()' method on it.
+<span class='line'> 41</span>  *
+<span class='line'> 42</span>  * @param {rock.game.graphics.model.Model} model
+<span class='line'> 43</span>  *
+<span class='line'> 44</span>  * @returns {rock.scene.node.ModelNode}
+<span class='line'> 45</span>  */</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="NAME">rock.scene.engine.SceneEngine.prototype.createModelNode</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">model</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 47</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">modelNode</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">rock.scene.node.ModelNode</span><span class="PUNC">(</span><span class="NAME">this.world</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 48</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">representation</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this.createRepresentation</span><span class="PUNC">(</span><span class="NAME">modelNode</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 49</span>     </span><span class="NAME">representation.createRenderablesFromModel</span><span class="PUNC">(</span><span class="NAME">model</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 50</span> 
+<span class='line'> 51</span>     </span><span class="NAME">modelNode.setRepresentation</span><span class="PUNC">(</span><span class="NAME">representation</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 52</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">modelNode</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 53</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 54</span> 
+<span class='line'> 55</span> </span><span class="COMM">/**
+<span class='line'> 56</span>  * Create a node for set lighting to the scene
+<span class='line'> 57</span>  *
+<span class='line'> 58</span>  * @param {rock.game.graphics.scene.Lighting} lighting
+<span class='line'> 59</span>  *
+<span class='line'> 60</span>  * @returns {rock.scene.node.LightingNode}
+<span class='line'> 61</span>  */</span><span class="WHIT">
+<span class='line'> 62</span> </span><span class="NAME">rock.scene.engine.SceneEngine.prototype.createLightingNode</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">lighting</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 63</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">lightNode</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">rock.scene.node.LightingNode</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 64</span>     </span><span class="NAME">lightNode.setLighting</span><span class="PUNC">(</span><span class="NAME">lighting</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 65</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">lightNode</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 66</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 67</span> 
+<span class='line'> 68</span> </span><span class="COMM">/**
+<span class='line'> 69</span>  * Create a node for set a camera to the scene
+<span class='line'> 70</span>  *
+<span class='line'> 71</span>  * @param {rock.game.graphics.scene.Camera} camera
+<span class='line'> 72</span>  *
+<span class='line'> 73</span>  * @returns {rock.scene.node.CameraNode}
+<span class='line'> 74</span>  */</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="NAME">rock.scene.engine.SceneEngine.prototype.createCameraNode</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">camera</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 76</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">cameraNode</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">rock.scene.node.CameraNode</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 77</span>     </span><span class="NAME">cameraNode.setCamera</span><span class="PUNC">(</span><span class="NAME">camera</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 78</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">cameraNode</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 79</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 80</span> 
+<span class='line'> 81</span> </span><span class="NAME">rock.scene.engine.SceneEngine.prototype.setRendererContextId</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">rendererContextId</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 82</span>     </span><span class="NAME">this.renderEngine.setActiveRendererContext</span><span class="PUNC">(</span><span class="NAME">rendererContextId</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 83</span> </span><span class="PUNC">}</span><span class="PUNC">;</span></pre></body></html>
