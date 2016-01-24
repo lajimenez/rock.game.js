@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Rock game test page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script type="text/javascript" src="/rock.js/src/main/js/load-rock.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/rock.game.js/src/main/js/load-rock-game.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="js/load-app.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        loadRock('/rock.js/src/main/js/rock/');
+        loadRockGame('../main/js/rock/');
+        loadApp('js/app/');
+    </script>
+    <script type="text/javascript" src="init.js" charset="UTF-8"></script>
+</head>
+<body onload="init('divTestApp', 'resources/');">
+
+<br/>
+<div class="center">
+    <div id="divTestApp" class="fit"></div>
+</div>
+
+<div class="center">
+    <div id="divShowModelControls" class="hidden">
+        Click mouse wheel button and move mouse to move camera.<br/>
+        Move mouse wheel down to move away the camera.<br/>
+        Move mouse wheel up to bring near the camera.<br/>
+        Push <b>'w'</b> to see model as wireframe.<br/>
+        Push <b>'b'</b> to see bounding box model.<br/>
+        Push <b>'n'</b> to see normals.<br/>
+        Push <b>'l'</b> to change lighting mode.<br/>
+        Push <b>'f'</b> to fix light position.
+    </div>
+    <div id="divShowSceneControls" class="hidden">
+        Click mouse wheel button and move mouse to move camera.<br/>
+        Push <b>'w'</b> or <b>up</b> move ahead camera position.<br/>
+        Push <b>'s'</b> or <b>down</b> move back camera position.<br/>
+        Push <b>'a'</b> or <b>left</b> move left camera position.<br/>
+        Push <b>'d'</b> or <b>right</b> move right camera position.<br/>
+    </div>
+</div>
+
+</body>
+</html>
