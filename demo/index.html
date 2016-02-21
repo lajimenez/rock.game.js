@@ -20,7 +20,44 @@
 </div>
 
 <div class="center">
-    <div id="divShowModelControls" class="hidden">
+    <div id="divShowModelControlsInfo" class="hidden">
+        <input type="checkbox" id="checkboxShowHTMLUIShowModel"><b>Show HTML UI</b><br>
+        <div id="divUIShowModel" class="hidden">
+            <table align="center">
+                <tr>
+                    <td>
+                        <i>Camera angle</i>
+                    </td>
+                    <td>
+                        <i>Zoom</i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rightSeparatorCell">
+                        <table>
+                            <tr>
+                                <th rowspan="2"><button id="buttonMoveCameraLeftShowModel">Left</button></th>
+                                <td><button id="buttonMoveCameraUpShowModel">Up</button></td>
+                                <th rowspan="2"><button id="buttonMoveCameraRightShowModel">Right</button></th>
+                            </tr>
+                            <tr>
+                                <td><button id="buttonMoveCameraDownShowModel">Down</button></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td><button id="buttonZoomInDownShowModel">Zoom in</button></td>
+                            </tr>
+                            <tr>
+                                <td><button id="buttonZoomOutDownShowModel">Zoom out</button></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
         Click mouse wheel button and move mouse to move camera.<br/>
         Move mouse wheel down to move away the camera.<br/>
         Move mouse wheel up to bring near the camera.<br/>
@@ -31,6 +68,45 @@
         Push <b>'f'</b> to fix light position.
     </div>
     <div id="divShowSceneControls" class="hidden">
+        <input type="checkbox" id="checkboxShowHTMLUIShowScene"><b>Show HTML UI</b><br>
+        <div id="divUIShowScene" class="hidden">
+            <table align="center">
+                <tr>
+                    <td>
+                        <i>Camera angle</i>
+                    </td>
+                    <td>
+                        <i>Camera Position</i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rightSeparatorCell">
+                        <table>
+                            <tr>
+                                <th rowspan="2"><button id="buttonMoveCameraLeftShowScene">Left</button></th>
+                                <td><button id="buttonMoveCameraUpShowScene">Up</button></td>
+                                <th rowspan="2"><button id="buttonMoveCameraRightShowScene">Right</button></th>
+                            </tr>
+                            <tr>
+                                <td><button id="buttonMoveCameraDownShowScene">Down</button></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <th rowspan="2"><button id="buttonMovePositionLeftShowScene">Left</button></th>
+                                <td><button id="buttonMovePositionForwardShowScene">Forward</button></td>
+                                <th rowspan="2"><button id="buttonMovePositionRightShowScene">Right</button></th>
+                            </tr>
+                            <tr>
+                                <td><button id="buttonMovePositionBackwardShowScene">Backward</button></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
         Click mouse wheel button and move mouse to move camera.<br/>
         Push <b>'w'</b> or <b>up</b> move ahead camera position.<br/>
         Push <b>'s'</b> or <b>down</b> move back camera position.<br/>
