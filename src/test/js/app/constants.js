@@ -27,6 +27,9 @@ app.constants = {
     RES_TEXTURE_C3PO_S : 'C-3PO_S.png',
     RES_TEXTURE_R2D2 : 'R2-D2.png',
     RES_TEXTURE_R2D2_S : 'R2-D2_S.png',
-    RES_TEXTURE_DARTHSIDIOUS : 'DarthSidious.png'
+    RES_TEXTURE_DARTHSIDIOUS : 'DarthSidious.png',
+
+    TEST_ROCK_GAME_JS_APP : 'TEST_ROCK_GAME_JS_APP',
+    EXPOSED_UI_SHOW_MODE : 'EXPOSED_UI_SHOW_MODE'
 
 };

@@ -16,8 +16,11 @@ app.engine.ShowModelSceneEngine = function (graphicsEngine, repository) {
     rock.super_(this, [graphicsEngine, repository]);
 
     this.FOV = 60;
-    this.WHEEL_ADJUSTMENT = .05;
+    this.ZOOM_ADJUSTMENT = .05;
     this.MIN_ZNEAR = 0.1;
+
+    this.UI_CAMERA_VARIATION = 10;
+    this.DEFAULT_ZOOM_VARIATION = 120;
 
     this.center = null;
     this.maxRange = -1;
@@ -31,7 +34,7 @@ app.engine.ShowModelSceneEngine = function (graphicsEngine, repository) {
     this.lastMousePositionY = null;
     this.variationX = 0;
     this.variationY = 90;
-    this.variationWheel = 0;
+    this.variationZoom = 0;
 
     this.directionalLightingNode = null;
     this.pointLightingNode = null;
@@ -46,6 +49,8 @@ app.engine.ShowModelSceneEngine = function (graphicsEngine, repository) {
     this.currentModelNode = null;
     this.showingBBOX = false;
     this.showingNormals = false;
+
+    this.prepareExternalUI();
 };
 
 rock.extends_(app.engine.ShowModelSceneEngine, rock.scene.engine.SceneEngine);
@@ -238,6 +243,8 @@ app.engine.ShowModelSceneEngine.prototype.initCameraValues = function () {
  * @private
  */
 app.engine.ShowModelSceneEngine.prototype.updateCamera = function () {
+    this.adjustVariations();
+
     var camera = this.cameraNode.getCamera();
     var radius = this.radius;
     var variationX = this.variationX;
@@ -246,7 +253,7 @@ app.engine.ShowModelSceneEngine.prototype.updateCamera = function () {
     var lookAt = camera.getLookAt();
     var position = camera.getPosition();
 
-    radius = radius + this.variationWheel;
+    radius = radius + this.variationZoom;
 
     // Update position
     var phi = rock.util.GeometryUtils.degToRad(variationX);
@@ -274,6 +281,28 @@ app.engine.ShowModelSceneEngine.prototype.updateCamera = function () {
 
 };
 
+app.engine.ShowModelSceneEngine.prototype.adjustVariations = function () {
+    var variationX = this.variationX;
+    var variationY = this.variationY;
+
+    if (variationX > 360) {
+        variationX = variationX % 360;
+    } else if (variationX < 0) {
+        while (variationX < 0) {
+            variationX = variationX + 360;
+        }
+    }
+
+    if (variationY > 179 ) {
+        variationY = 179;
+    } else if (variationY < 1) {
+        variationY = 1;
+    }
+
+    this.variationX = variationX;
+    this.variationY = variationY;
+};
+
 app.engine.ShowModelSceneEngine.prototype.enableMotion = function (enable) {
     this.enabledMotion = enable;
 };
@@ -284,22 +313,8 @@ app.engine.ShowModelSceneEngine.prototype.calculateVariation = function (mousePo
     var currentVariationX = mousePositionX - lastMousePositionX;
     var currentVariationY = mousePositionY - lastMousePositionY;
 
-    var variationX =  this.variationX + (currentVariationX * ADJUSTMENT);
-    if (variationX > 360) {
-        variationX = variationX % 360;
-    } else if (variationX < 0) {
-        variationX = variationX + 360;
-    }
-
-    var variationY =  this.variationY + (currentVariationY * ADJUSTMENT);
-    if (variationY > 179 ) {
-        variationY = 179;
-    } else if (variationY < 1) {
-        variationY = 1;
-    }
-
-    this.variationX = variationX;
-    this.variationY = variationY;
+    this.variationX =  this.variationX + (currentVariationX * ADJUSTMENT);
+    this.variationY = this.variationY + (currentVariationY * ADJUSTMENT);
 };
 
 app.engine.ShowModelSceneEngine.prototype.flipModel = function () {
@@ -420,23 +435,26 @@ app.engine.ShowModelSceneEngine.prototype.onMouseUp = function (event) {
     }
 };
 
-app.engine.ShowModelSceneEngine.prototype.onMouseWheel = function (event) {
+app.engine.ShowModelSceneEngine.prototype.applyZoom = function (delta) {
     // It will be nice that the variation was progressive (bigger variation when radius is greater...)
     // The effect will be better...
     var radius = this.radius;
     var midMaxRange = this.maxRange / 2;
 
-    var currentVariationWheel = radius * this.WHEEL_ADJUSTMENT;
-    var wheelDelta = -event.getDelta();
-    if ( wheelDelta > 0) {
-        this.variationWheel += currentVariationWheel;
+    var currentVariationZoom = radius * this.ZOOM_ADJUSTMENT;
+    if ( delta > 0) {
+        this.variationZoom += currentVariationZoom;
     } else {
-        if (radius + this.variationWheel + currentVariationWheel > midMaxRange) {
-            this.variationWheel -= currentVariationWheel;
+        if (radius + this.variationZoom + currentVariationZoom > midMaxRange) {
+            this.variationZoom -= currentVariationZoom;
         }
     }
 
     this.drawModel();
+};
+
+app.engine.ShowModelSceneEngine.prototype.onMouseWheel = function (event) {
+    this.applyZoom(-event.getDelta());
 };
 
 app.engine.ShowModelSceneEngine.prototype.onMouseMove = function (event) {
@@ -474,4 +492,65 @@ app.engine.ShowModelSceneEngine.prototype.onKeyUp = function (event) {
     } else if (keyCode == 70) {
         this.flipFreezeLighting();
     }
+};
+
+app.engine.ShowModelSceneEngine.prototype.moveCameraLeft = function () {
+    this.variationX -= this.UI_CAMERA_VARIATION;
+    this.drawModel();
+};
+
+app.engine.ShowModelSceneEngine.prototype.moveCameraRight = function () {
+    this.variationX += this.UI_CAMERA_VARIATION;
+    this.drawModel();
+};
+
+app.engine.ShowModelSceneEngine.prototype.moveCameraUp = function () {
+    this.variationY -= this.UI_CAMERA_VARIATION;
+    this.drawModel();
+};
+
+app.engine.ShowModelSceneEngine.prototype.moveCameraDown = function () {
+    this.variationY += this.UI_CAMERA_VARIATION;
+    this.drawModel();
+};
+
+app.engine.ShowModelSceneEngine.prototype.onButtonZoomInDownShowModel = function () {
+    this.applyZoom(-this.DEFAULT_ZOOM_VARIATION);
+};
+
+app.engine.ShowModelSceneEngine.prototype.onButtonZoomOutDownShowModel = function () {
+    this.applyZoom(this.DEFAULT_ZOOM_VARIATION);
+};
+
+app.engine.ShowModelSceneEngine.prototype.prepareExternalUI = function () {
+    this.prepareCameraAngleExternalUI();
+    this.prepareZoomExternalUI();
+};
+
+app.engine.ShowModelSceneEngine.prototype.prepareCameraAngleExternalUI = function () {
+    var buttonMoveCameraLeftShowModel = rock.util.DOMUtils.getElementById('buttonMoveCameraLeftShowModel');
+    rock.util.DOMUtils.addEventListener(buttonMoveCameraLeftShowModel, rock.constants.HTML_DOM_EVENT_CLICK,
+        rock.createEventHandler(this, this.moveCameraLeft));
+
+    var buttonMoveCameraRightShowModel = rock.util.DOMUtils.getElementById('buttonMoveCameraRightShowModel');
+    rock.util.DOMUtils.addEventListener(buttonMoveCameraRightShowModel, rock.constants.HTML_DOM_EVENT_CLICK,
+        rock.createEventHandler(this, this.moveCameraRight));
+
+    var buttonMoveCameraUpShowModel = rock.util.DOMUtils.getElementById('buttonMoveCameraUpShowModel');
+    rock.util.DOMUtils.addEventListener(buttonMoveCameraUpShowModel, rock.constants.HTML_DOM_EVENT_CLICK,
+        rock.createEventHandler(this, this.moveCameraUp));
+
+    var buttonMoveCameraDownShowModel = rock.util.DOMUtils.getElementById('buttonMoveCameraDownShowModel');
+    rock.util.DOMUtils.addEventListener(buttonMoveCameraDownShowModel, rock.constants.HTML_DOM_EVENT_CLICK,
+        rock.createEventHandler(this, this.moveCameraDown));
+};
+
+app.engine.ShowModelSceneEngine.prototype.prepareZoomExternalUI = function () {
+    var buttonZoomInDownShowModel = rock.util.DOMUtils.getElementById('buttonZoomInDownShowModel');
+    rock.util.DOMUtils.addEventListener(buttonZoomInDownShowModel, rock.constants.HTML_DOM_EVENT_CLICK,
+        rock.createEventHandler(this, this.onButtonZoomInDownShowModel));
+
+    var buttonZoomOutDownShowModel = rock.util.DOMUtils.getElementById('buttonZoomOutDownShowModel');
+    rock.util.DOMUtils.addEventListener(buttonZoomOutDownShowModel, rock.constants.HTML_DOM_EVENT_CLICK,
+        rock.createEventHandler(this, this.onButtonZoomOutDownShowModel));
 };

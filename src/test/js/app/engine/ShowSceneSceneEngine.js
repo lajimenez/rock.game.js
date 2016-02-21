@@ -15,6 +15,14 @@ rock.namespace('app.engine');
 app.engine.ShowSceneSceneEngine = function (graphicsEngine, repository) {
     rock.super_(this, [graphicsEngine, repository]);
 
+    this.FOV = 60;
+    this.ZNEAR = 1;
+    this.ZFAR = 10000; // 3d units
+
+    this.CAMERA_POSITION_Y = 15;
+
+    this.UI_CAMERA_VARIATION = 7;
+
     this.cameraNode = null;
     this.skydomeModelNode = null;
     this.teapotModelNode = null;
@@ -27,12 +35,6 @@ app.engine.ShowSceneSceneEngine = function (graphicsEngine, repository) {
     this.lastMousePositionY = null;
 
     this.enabledMotion = false;
-
-    this.FOV = 60;
-    this.ZNEAR = 1;
-    this.ZFAR = 10000; // 3d units
-
-    this.CAMERA_POSITION_Y = 15;
 
     this.cameraAngleX = 180;
     this.cameraAngleY = 90;
@@ -72,6 +74,8 @@ app.engine.ShowSceneSceneEngine = function (graphicsEngine, repository) {
     this.crossResult_ma = new rock.geometry.Vector3(0, 0, 0);
 
     this.expectedCameraPosition_ma = new rock.geometry.Point3(0, this.CAMERA_POSITION_Y, 0);
+
+    this.prepareExternalUI();
 };
 
 rock.extends_(app.engine.ShowSceneSceneEngine, rock.scene.engine.SceneEngine);
@@ -307,6 +311,8 @@ app.engine.ShowSceneSceneEngine.prototype.computeCameraMovement = function () {
 };
 
 app.engine.ShowSceneSceneEngine.prototype.updateCamera = function () {
+    this.adjustCameraAngle();
+
     var camera = this.cameraNode.getCamera();
     var cameraAngleX = this.cameraAngleX;
     var cameraAngleY = this.cameraAngleY;
@@ -329,6 +335,28 @@ app.engine.ShowSceneSceneEngine.prototype.updateCamera = function () {
     lookAt.setX(position.getX() - xRot);
     lookAt.setY(position.getY() + yRot);
     lookAt.setZ(position.getZ() + zRot);
+};
+
+app.engine.ShowSceneSceneEngine.prototype.adjustCameraAngle = function () {
+    var cameraAngleX = this.cameraAngleX;
+    var cameraAngleY = this.cameraAngleY;
+
+    if (cameraAngleX > 360) {
+        cameraAngleX = cameraAngleX % 360;
+    } else if (cameraAngleX < 0) {
+        while (cameraAngleX < 0) {
+            cameraAngleX = cameraAngleX + 360;
+        }
+    }
+
+    if (cameraAngleY > 179 ) {
+        cameraAngleY = 179;
+    } else if (cameraAngleY < 1) {
+        cameraAngleY = 1;
+    }
+
+    this.cameraAngleX = cameraAngleX;
+    this.cameraAngleY = cameraAngleY;
 };
 
 app.engine.ShowSceneSceneEngine.prototype.updateSkydome = function () {
@@ -381,22 +409,8 @@ app.engine.ShowSceneSceneEngine.prototype.calculateMouseVariation = function (mo
     var currentVariationX = mousePositionX - lastMousePositionX;
     var currentVariationY = mousePositionY - lastMousePositionY;
 
-    var cameraAngleX =  this.cameraAngleX + (currentVariationX * ADJUSTMENT);
-    if (cameraAngleX > 360) {
-        cameraAngleX = cameraAngleX % 360;
-    } else if (cameraAngleX < 0) {
-        cameraAngleX = cameraAngleX + 360;
-    }
-
-    var cameraAngleY =  this.cameraAngleY + (currentVariationY * ADJUSTMENT);
-    if (cameraAngleY > 179 ) {
-        cameraAngleY = 179;
-    } else if (cameraAngleY < 1) {
-        cameraAngleY = 1;
-    }
-
-    this.cameraAngleX = cameraAngleX;
-    this.cameraAngleY = cameraAngleY;
+    this.cameraAngleX = this.cameraAngleX + (currentVariationX * ADJUSTMENT);
+    this.cameraAngleY = this.cameraAngleY + (currentVariationY * ADJUSTMENT);
 };
 
 app.engine.ShowSceneSceneEngine.prototype.onKeyDown = function (event) {
@@ -412,17 +426,33 @@ app.engine.ShowSceneSceneEngine.prototype.onKeyUp = function (event) {
 app.engine.ShowSceneSceneEngine.prototype.updateMovementOnKeyEvent = function (keyCode, isMoving) {
     if (keyCode == 87 || keyCode == 38) {
         // forward
-        this.isMovingForward = isMoving;
+        this.setMovingForward(isMoving);
     } if (keyCode == 83 || keyCode == 40) {
         // backward
-        this.isMovingBackward = isMoving;
+        this.setMovingBackward(isMoving);
     } else if (keyCode == 65 || keyCode == 37) {
         // left
-        this.isMovingLeft = isMoving;
+        this.setMovingLeft(isMoving);
     } else if (keyCode == 68 || keyCode == 39) {
         // right
-        this.isMovingRight = isMoving;
+        this.setMovingRight(isMoving);
     }
+};
+
+app.engine.ShowSceneSceneEngine.prototype.setMovingForward = function (isMoving) {
+    this.isMovingForward = isMoving;
+};
+
+app.engine.ShowSceneSceneEngine.prototype.setMovingBackward = function (isMoving) {
+    this.isMovingBackward = isMoving;
+};
+
+app.engine.ShowSceneSceneEngine.prototype.setMovingLeft = function (isMoving) {
+    this.isMovingLeft = isMoving;
+};
+
+app.engine.ShowSceneSceneEngine.prototype.setMovingRight = function (isMoving) {
+    this.isMovingRight = isMoving;
 };
 
 app.engine.ShowSceneSceneEngine.prototype.moveForward = function () {
@@ -520,4 +550,93 @@ app.engine.ShowSceneSceneEngine.prototype.onWindowDeactivate = function (event) 
 
 app.engine.ShowSceneSceneEngine.prototype.enableMotion = function (enable) {
     this.enabledMotion = enable;
+};
+
+app.engine.ShowSceneSceneEngine.prototype.moveCameraLeft = function () {
+    this.cameraAngleX -= this.UI_CAMERA_VARIATION;
+};
+
+app.engine.ShowSceneSceneEngine.prototype.moveCameraRight = function () {
+    this.cameraAngleX += this.UI_CAMERA_VARIATION;
+};
+
+app.engine.ShowSceneSceneEngine.prototype.moveCameraUp = function () {
+    this.cameraAngleY -= this.UI_CAMERA_VARIATION;
+};
+
+app.engine.ShowSceneSceneEngine.prototype.moveCameraDown = function () {
+    this.cameraAngleY += this.UI_CAMERA_VARIATION;
+};
+
+app.engine.ShowSceneSceneEngine.prototype.prepareExternalUI = function () {
+    this.prepareCameraAngleExternalUI();
+    this.prepareCameraPositionExternalUI();
+};
+
+app.engine.ShowSceneSceneEngine.prototype.prepareCameraAngleExternalUI = function () {
+    var buttonMoveCameraLeftShowScene = rock.util.DOMUtils.getElementById('buttonMoveCameraLeftShowScene');
+    rock.util.DOMUtils.addEventListener(buttonMoveCameraLeftShowScene, rock.constants.HTML_DOM_EVENT_CLICK,
+        rock.createEventHandler(this, this.moveCameraLeft));
+
+    var buttonMoveCameraRightShowScene = rock.util.DOMUtils.getElementById('buttonMoveCameraRightShowScene');
+    rock.util.DOMUtils.addEventListener(buttonMoveCameraRightShowScene, rock.constants.HTML_DOM_EVENT_CLICK,
+        rock.createEventHandler(this, this.moveCameraRight));
+
+    var buttonMoveCameraUpShowScene = rock.util.DOMUtils.getElementById('buttonMoveCameraUpShowScene');
+    rock.util.DOMUtils.addEventListener(buttonMoveCameraUpShowScene, rock.constants.HTML_DOM_EVENT_CLICK,
+        rock.createEventHandler(this, this.moveCameraUp));
+
+    var buttonMoveCameraDownShowScene = rock.util.DOMUtils.getElementById('buttonMoveCameraDownShowScene');
+    rock.util.DOMUtils.addEventListener(buttonMoveCameraDownShowScene, rock.constants.HTML_DOM_EVENT_CLICK,
+        rock.createEventHandler(this, this.moveCameraDown));
+};
+
+app.engine.ShowSceneSceneEngine.prototype.onButtonMovePositionLeftShowScene = function (event, isMoving) {
+    this.setMovingLeft(isMoving);
+};
+
+app.engine.ShowSceneSceneEngine.prototype.onButtonMovePositionRightShowScene = function (event, isMoving) {
+    this.setMovingRight(isMoving);
+};
+
+app.engine.ShowSceneSceneEngine.prototype.onButtonMovePositionForwardShowScene = function (event, isMoving) {
+    this.setMovingForward(isMoving);
+};
+
+app.engine.ShowSceneSceneEngine.prototype.onButtonMovePositionBackwardShowScene = function (event, isMoving) {
+    this.setMovingBackward(isMoving);
+};
+
+app.engine.ShowSceneSceneEngine.prototype.prepareCameraPositionExternalUI = function () {
+    var buttonMovePositionLeftShowScene = rock.util.DOMUtils.getElementById('buttonMovePositionLeftShowScene');
+    rock.util.DOMUtils.addEventListener(buttonMovePositionLeftShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_DOWN,
+        rock.createEventHandler(this, this.onButtonMovePositionLeftShowScene, [true]));
+    rock.util.DOMUtils.addEventListener(buttonMovePositionLeftShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_UP,
+        rock.createEventHandler(this, this.onButtonMovePositionLeftShowScene, [false]));
+    rock.util.DOMUtils.addEventListener(buttonMovePositionLeftShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_LEAVE,
+        rock.createEventHandler(this, this.onButtonMovePositionLeftShowScene, [false]));
+
+    var buttonMovePositionRightShowScene = rock.util.DOMUtils.getElementById('buttonMovePositionRightShowScene');
+    rock.util.DOMUtils.addEventListener(buttonMovePositionRightShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_DOWN,
+        rock.createEventHandler(this, this.onButtonMovePositionRightShowScene, [true]));
+    rock.util.DOMUtils.addEventListener(buttonMovePositionRightShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_UP,
+        rock.createEventHandler(this, this.onButtonMovePositionRightShowScene, [false]));
+    rock.util.DOMUtils.addEventListener(buttonMovePositionRightShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_LEAVE,
+        rock.createEventHandler(this, this.onButtonMovePositionRightShowScene, [false]));
+
+    var buttonMovePositionForwardShowScene = rock.util.DOMUtils.getElementById('buttonMovePositionForwardShowScene');
+    rock.util.DOMUtils.addEventListener(buttonMovePositionForwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_DOWN,
+        rock.createEventHandler(this, this.onButtonMovePositionForwardShowScene, [true]));
+    rock.util.DOMUtils.addEventListener(buttonMovePositionForwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_UP,
+        rock.createEventHandler(this, this.onButtonMovePositionForwardShowScene, [false]));
+    rock.util.DOMUtils.addEventListener(buttonMovePositionForwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_LEAVE,
+        rock.createEventHandler(this, this.onButtonMovePositionForwardShowScene, [false]));
+
+    var buttonMovePositionBackwardShowScene = rock.util.DOMUtils.getElementById('buttonMovePositionBackwardShowScene');
+    rock.util.DOMUtils.addEventListener(buttonMovePositionBackwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_DOWN,
+        rock.createEventHandler(this, this.onButtonMovePositionBackwardShowScene, [true]));
+    rock.util.DOMUtils.addEventListener(buttonMovePositionBackwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_UP,
+        rock.createEventHandler(this, this.onButtonMovePositionBackwardShowScene, [false]));
+    rock.util.DOMUtils.addEventListener(buttonMovePositionBackwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_LEAVE,
+        rock.createEventHandler(this, this.onButtonMovePositionBackwardShowScene, [false]));
 };

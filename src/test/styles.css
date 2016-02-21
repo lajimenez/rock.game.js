@@ -7,10 +7,18 @@ html * {
     display: none;
 }
 
+.visible {
+    display: block;
+}
+
 .center {
     text-align: center;
 }
 
 .fit {
     display: inline-block;
+}
+
+.rightSeparatorCell {
+    border-right: 1px solid;
 }

@@ -60,8 +60,7 @@ app.window.MainWindow.prototype.addComponents = function () {
 };
 
 app.window.MainWindow.prototype.handleOnShowModelButtonClick = function (event) {
-    var divControls = rock.util.DOMUtils.getElementById('divShowModelControls');
-    divControls.style.display = 'block';
+    this.displayShowModelDiv();
 
     var showModelWindow = this.windowSystem.getWindow(app.constants.SHOW_MODEL_WINDOW);
 
@@ -77,13 +76,22 @@ app.window.MainWindow.prototype.handleOnShowModelButtonClick = function (event) 
     this.windowSystem.setCurrentWindow(showModelWindow);
 };
 
+app.window.MainWindow.prototype.displayShowModelDiv = function () {
+    var divShowModelControlsInfo = rock.util.DOMUtils.getElementById('divShowModelControlsInfo');
+    divShowModelControlsInfo.style.display = 'block';
+};
+
 app.window.MainWindow.prototype.handleOnShowSceneButtonClick = function (event) {
-    var divControls = rock.util.DOMUtils.getElementById('divShowSceneControls');
-    divControls.style.display = 'block';
+    this.displayShowSceneDiv();
 
     var showSceneWindow = this.windowSystem.getWindow(app.constants.SHOW_SCENE_WINDOW);
     showSceneWindow.loadScene();
     this.windowSystem.setCurrentWindow(showSceneWindow);
+};
+
+app.window.MainWindow.prototype.displayShowSceneDiv = function () {
+    var divControls = rock.util.DOMUtils.getElementById('divShowSceneControls');
+    divControls.style.display = 'block';
 };
 
 app.window.MainWindow.prototype.handleOnExecuteGeometryTestButtonClick = function (event) {
