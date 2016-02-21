@@ -608,35 +608,26 @@ app.engine.ShowSceneSceneEngine.prototype.onButtonMovePositionBackwardShowScene 
 };
 
 app.engine.ShowSceneSceneEngine.prototype.prepareCameraPositionExternalUI = function () {
-    var buttonMovePositionLeftShowScene = rock.util.DOMUtils.getElementById('buttonMovePositionLeftShowScene');
-    rock.util.DOMUtils.addEventListener(buttonMovePositionLeftShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_DOWN,
-        rock.createEventHandler(this, this.onButtonMovePositionLeftShowScene, [true]));
-    rock.util.DOMUtils.addEventListener(buttonMovePositionLeftShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_UP,
-        rock.createEventHandler(this, this.onButtonMovePositionLeftShowScene, [false]));
-    rock.util.DOMUtils.addEventListener(buttonMovePositionLeftShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_LEAVE,
-        rock.createEventHandler(this, this.onButtonMovePositionLeftShowScene, [false]));
+    this.createAllNecessaryEventHandlersCameraPositionButton('buttonMovePositionLeftShowScene',
+        this.onButtonMovePositionLeftShowScene);
+    this.createAllNecessaryEventHandlersCameraPositionButton('buttonMovePositionRightShowScene',
+        this.onButtonMovePositionRightShowScene);
+    this.createAllNecessaryEventHandlersCameraPositionButton('buttonMovePositionForwardShowScene',
+        this.onButtonMovePositionForwardShowScene);
+    this.createAllNecessaryEventHandlersCameraPositionButton('buttonMovePositionBackwardShowScene',
+        this.onButtonMovePositionBackwardShowScene);
+};
 
-    var buttonMovePositionRightShowScene = rock.util.DOMUtils.getElementById('buttonMovePositionRightShowScene');
-    rock.util.DOMUtils.addEventListener(buttonMovePositionRightShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_DOWN,
-        rock.createEventHandler(this, this.onButtonMovePositionRightShowScene, [true]));
-    rock.util.DOMUtils.addEventListener(buttonMovePositionRightShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_UP,
-        rock.createEventHandler(this, this.onButtonMovePositionRightShowScene, [false]));
-    rock.util.DOMUtils.addEventListener(buttonMovePositionRightShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_LEAVE,
-        rock.createEventHandler(this, this.onButtonMovePositionRightShowScene, [false]));
+app.engine.ShowSceneSceneEngine.prototype.createAllNecessaryEventHandlersCameraPositionButton = function (buttonId, handler) {
+    var button = rock.util.DOMUtils.getElementById(buttonId);
 
-    var buttonMovePositionForwardShowScene = rock.util.DOMUtils.getElementById('buttonMovePositionForwardShowScene');
-    rock.util.DOMUtils.addEventListener(buttonMovePositionForwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_DOWN,
-        rock.createEventHandler(this, this.onButtonMovePositionForwardShowScene, [true]));
-    rock.util.DOMUtils.addEventListener(buttonMovePositionForwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_UP,
-        rock.createEventHandler(this, this.onButtonMovePositionForwardShowScene, [false]));
-    rock.util.DOMUtils.addEventListener(buttonMovePositionForwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_LEAVE,
-        rock.createEventHandler(this, this.onButtonMovePositionForwardShowScene, [false]));
+    var eventHandlerStart = rock.createEventHandler(this, handler, [true]);
+    var eventHandlerStop = rock.createEventHandler(this, handler, [false]);
 
-    var buttonMovePositionBackwardShowScene = rock.util.DOMUtils.getElementById('buttonMovePositionBackwardShowScene');
-    rock.util.DOMUtils.addEventListener(buttonMovePositionBackwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_DOWN,
-        rock.createEventHandler(this, this.onButtonMovePositionBackwardShowScene, [true]));
-    rock.util.DOMUtils.addEventListener(buttonMovePositionBackwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_UP,
-        rock.createEventHandler(this, this.onButtonMovePositionBackwardShowScene, [false]));
-    rock.util.DOMUtils.addEventListener(buttonMovePositionBackwardShowScene, rock.constants.HTML_DOM_EVENT_MOUSE_LEAVE,
-        rock.createEventHandler(this, this.onButtonMovePositionBackwardShowScene, [false]));
+    rock.util.DOMUtils.addEventListener(button, rock.constants.HTML_DOM_EVENT_MOUSE_DOWN, eventHandlerStart);
+    rock.util.DOMUtils.addEventListener(button, rock.constants.HTML_DOM_EVENT_MOUSE_UP, eventHandlerStop);
+    rock.util.DOMUtils.addEventListener(button, rock.constants.HTML_DOM_EVENT_MOUSE_LEAVE, eventHandlerStop);
+
+    rock.util.DOMUtils.addEventListener(button, 'touchstart', eventHandlerStart);
+    rock.util.DOMUtils.addEventListener(button, 'touchend', eventHandlerStop);
 };
