@@ -1,3 +1,8 @@
+# Hi developer!
+
+I started this project some years ago. I did just for fun and I learned a lot. Although it's not maintained anymore, still today there are some people who clone this project.
+If you are one of them and want to say to me whatever you want, please don't hesitate to send me an email to [lajimenez.rock@gmail.com](mailto:lajimenez.rock@gmail.com)
+
 # Documentation
 
 ## What is rock.game.js?
@@ -16,8 +21,8 @@ If you want to create a new game, please see how [pong](https://github.com/lajim
 
 ## JSDoc and examples
 
-You can find JSDoc for all classes [here](https://lajimenez.github.com/rock.game.js/jsdoc)
-You can find a scene running example [here](https://lajimenez.github.com/rock.game.js/demo)
+You can find JSDoc for all classes [here](https://lajimenez.github.io/rock.game.js/jsdoc)
+You can find a scene running example [here](https://lajimenez.github.io/rock.game.js/demo)
 
 ## 'Bad' news
 
